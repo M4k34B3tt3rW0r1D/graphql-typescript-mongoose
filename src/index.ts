@@ -1,10 +1,18 @@
 import {GraphQLServer} from "graphql-yoga";
-import {resolvers} from './resolvers';
+const Query =require('./resolvers/Query');
 
+const resolvers = {
+    Query,
+};
 const server = new GraphQLServer( {
     typeDefs:'./src/schema.graphql',
-    resolvers
+    resolvers,
 });
 
-server.start( () => console.log("serveur started on http://localhost:4000"));
+const options = {
+    port:5000
+};
+
+server.start( options,({port}) =>
+    console.log(`serveur started on http://localhost:${port}`));
 
